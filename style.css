@@ -289,11 +289,144 @@ h2::after {
     z-index: 2;
 }
 
+/* Enhanced spinning animations for skills icons with glow effects */
 .skill i {
     font-size: 3.5rem;
     margin-bottom: 1rem;
     color: #00ffcc;
     text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    display: inline-block;
+}
+
+/* Main spin animation on hover with glow */
+.skill:hover i {
+    animation: spin 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) both, 
+               glow-pulse 1.5s ease-in-out infinite alternate;
+    color: #ff00ff;
+    text-shadow: 0 0 20px rgba(255, 0, 255, 0.9);
+    filter: drop-shadow(0 0 8px #ff00ff) drop-shadow(0 0 15px #00ffff);
+}
+
+/* Spin animation with bounce effect */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    25% {
+        transform: rotate(90deg) scale(1.2);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.3);
+    }
+    75% {
+        transform: rotate(270deg) scale(1.2);
+    }
+   100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+/* Glow pulse animation */
+@keyframes glow-pulse {
+    from {
+        filter: drop-shadow(0 0 5px #ff00ff) drop-shadow(0 0 10px #00ffff);
+        text-shadow: 0 0 10px rgba(255, 0, 255, 0.7);
+    }
+    to {
+        filter: drop-shadow(0 0 15px #ff00ff) drop-shadow(0 0 25px #00ffff);
+        text-shadow: 0 0 20px rgba(255, 0, 255, 0.9), 0 0 30px rgba(0, 255, 255, 0.7);
+    }
+}
+
+/* Different spin directions for variety */
+.skill:nth-child(odd):hover i {
+    animation: spin 1s ease-in-out both, 
+               glow-pulse 1.5s ease-in-out infinite alternate;
+}
+
+.skill:nth-child(even):hover i {
+    animation: spin-reverse 1s ease-in-out both, 
+               glow-pulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes spin-reverse {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    25% {
+        transform: rotate(-90deg) scale(1.2);
+    }
+    50% {
+        transform: rotate(-180deg) scale(1.3);
+    }
+    75% {
+        transform: rotate(-270deg) scale(1.2);
+    }
+    100% {
+        transform: rotate(-360deg) scale(1);
+    }
+}
+
+/* Add some delay for staggered animations */
+.skill:nth-child(1):hover i { animation-delay: 0s, 0s; }
+.skill:nth-child(2):hover i { animation-delay: 0.1s, 0.1s; }
+.skill:nth-child(3):hover i { animation-delay: 0.2s, 0.2s; }
+.skill:nth-child(4):hover i { animation-delay: 0.3s, 0.3s; }
+.skill:nth-child(5):hover i { animation-delay: 0.4s, 0.4s; }
+
+/* Enhanced glow effect during spin */
+.skill:hover i::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, rgba(255, 0, 255, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: glow-expand 1s ease-in-out infinite alternate;
+    z-index: -1;
+}
+
+@keyframes glow-expand {
+    from {
+        width: 60px;
+        height: 60px;
+        opacity: 0.5;
+    }
+    to {
+        width: 100px;
+        height: 100px;
+        opacity: 0.8;
+    }
+}
+
+/* Special effects for specific skills */
+.skill:nth-child(1):hover i { /* HTML5 */
+    color: #e34f26;
+    filter: drop-shadow(0 0 8px #e34f26) drop-shadow(0 0 15px #ff7b3a);
+}
+
+.skill:nth-child(2):hover i { /* CSS3 */
+    color: #1572b6;
+    filter: drop-shadow(0 0 8px #1572b6) drop-shadow(0 0 15px #33a9dc);
+}
+
+.skill:nth-child(3):hover i { /* JavaScript */
+    color: #f7df1e;
+    filter: drop-shadow(0 0 8px #f7df1e) drop-shadow(0 0 15px #ffeb3b);
+}
+
+.skill:nth-child(4):hover i { /* React */
+    color: #61dafb;
+    filter: drop-shadow(0 0 8px #61dafb) drop-shadow(0 0 15px #88edff);
+}
+
+.skill:nth-child(5):hover i { /* Node.js */
+    color: #339933;
+    filter: drop-shadow(0 0 8px #339933) drop-shadow(0 0 15px #66cc66);
 }
 
 .skill p {
